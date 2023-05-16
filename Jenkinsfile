@@ -23,9 +23,10 @@ pipeline {
             }   
         stage('deploy') {
             steps {
-                sshagent(['tomcat_server']) 
-                  sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/teavm-maven-webapp/target/teavm-maven-webapp-1.2-RELEASE.war ubuntu@172.31.9.84/opt/tomcat/apache-tomcat-9.0.75/webapps'              
+                sshagent(['tomcat_server']) {
+                  sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/teavm-maven-webapp/target/teavm-maven-webapp-1.2-RELEASE.war ubuntu@172.31.9.84:/opt/tomcat/apache-tomcat-9.0.75/webapps'              
             }            
         }        
     }
 }
+
